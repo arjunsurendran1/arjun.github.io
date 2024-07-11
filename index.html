@@ -235,14 +235,14 @@
 
 
         <!--===== CONTACT =====-->
-        <section class="contact section" id="contact">
+        <section class="contact section" id="contactForm">
             <h2 class="section-title">Contact</h2>
 
             <div class="contact__container bd-grid">
                 <form action="" class="contact__form" id="submit-form">
-                    <input type="text" name="name" placeholder="Name" class="contact__input">
-                    <input type="mail" name= "email" placeholder="Email" class="contact__input">
-                    <textarea name="message" id="" cols="0" rows="10" placeholder="Write Something.." class="contact__input"></textarea>
+                    <input type="text" name="name" placeholder="Your Name" class="contact__input" required>
+                    <input type="mail" name= "email" placeholder="Email" class="contact__input" required>
+                    <textarea name="message" id="" cols="0" rows="10" placeholder="Write Something.." class="contact__input" required></textarea>
                     <input type="submit"  value="Submit" class="contact__button button">
                 </form>
             </div>
@@ -266,7 +266,7 @@
 
     <!--===== MAIN JS =====-->
     <script src="js/main.js"></script>
-
+<!--
     <script>
         $("#submit-form").submit((e) => {
             e.preventDefault()
@@ -286,6 +286,34 @@
             })
         })
     </script>
+----------------------------------------------------------------
+
+<form class="contact-form" id="contactForm">
+    <h2>Contact me</h2>
+    <input type="text" name="name" placeholder="Your Name" required>
+    <input type="email" name="email" placeholder="Your Email" required>
+    <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+    <button type="submit">Send</button>
+</form>
+----------------------------------------------------------
+-->
+<script>
+    // JavaScript to handle form submission
+    document.getElementById('contactForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const formData = new FormData(this);
+        fetch('send_email.php', {
+            method: 'POST',
+            body: formData
+        }).then(response => response.text()).then(data => {
+            alert(data);
+        }).catch(error => {
+            console.error('Error:', error);
+            alert('There was an error sending your message.');
+        });
+    });
+</script>
+
 </body>
 
 </html>
